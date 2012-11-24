@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/termos/db" VERSION="20120822" COMMENT="XMLDB file for Moodle mod/termos"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="termos" COMMENT="Tabela que guarda as politicas de uso de cada curso." NEXT="termos_agreed">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances" PREVIOUS="id" NEXT="intro"/>
+        <FIELD NAME="intro" TYPE="text" NOTNULL="false" SEQUENCE="false" PREVIOUS="name" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course termos activity belongs to" PREVIOUS="intro" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="course" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="termos_agreed" COMMENT="Tabela com os usuários que aceitaram as politicas de uso de cada curso." PREVIOUS="termos">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="termos_id"/>
+        <FIELD NAME="termos_id" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false" PREVIOUS="id" NEXT="user_id"/>
+        <FIELD NAME="user_id" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false" PREVIOUS="termos_id" NEXT="agreed"/>
+        <FIELD NAME="agreed" TYPE="int" LENGTH="20" NOTNULL="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="user_id"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

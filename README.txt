@@ -31,7 +31,7 @@ Instruções de instalação
         }
     }
 
-6 - Abaixo dela coloque este codigo    
+6 - Acima dela coloque este codigo    
 
     /**
      * Virifica se o usuario aceitou as politicas de uso do curso     
@@ -48,12 +48,12 @@ Instruções de instalação
         
         if($usuario){
             if (!$usuario->agreed and !is_siteadmin()) {
-                redirect($CFG->wwwroot .'/mod/termos/policy.php?id='.$course->id);
+                redirect($CFG->wwwroot .'/mod/termos/policy.php?course_id='.$course->id);
             } else {
                 $SESSION->wantsurl = qualified_me();        
             }
         } else {
-            redirect($CFG->wwwroot .'/mod/termos/policy.php?id='.$course->id);
+            redirect($CFG->wwwroot .'/mod/termos/policy.php?course_id='.$course->id);
         }
         $SESSION->wantsurl = qualified_me();
     }
